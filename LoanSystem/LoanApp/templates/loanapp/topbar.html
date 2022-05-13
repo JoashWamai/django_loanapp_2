@@ -1,0 +1,19 @@
+{% load static %}
+
+<div class="topbar">
+					<div class="search">
+						<label>
+							<input type="text" id="term" placeholder="Search here">
+							<i class="fa fa-search"></i>
+						</label>
+					</div>
+					<div class="user-info">
+						<div class="text">
+							<p>{{request.user.username}}</p>
+							<p>{{request.user.profile.Category}}</p>
+						</div>
+						<div class="user">
+							<img src="{{request.user.profile.Photo.url}}" alt="">
+						</div>
+					</div>
+				</div>

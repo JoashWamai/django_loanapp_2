@@ -1,0 +1,6 @@
+Procfile
+runtime.txt
+Venv/
+.env
+LoanSystem/LoanSystem/multiplesettings/settings.py
+.idea/

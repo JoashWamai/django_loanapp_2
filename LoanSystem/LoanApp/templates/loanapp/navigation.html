@@ -1,0 +1,61 @@
+
+{% load static %}
+
+{% block navbar %}
+
+    <div class="navigation">
+        <ul>
+            <li>
+                <span class="icon"></span>
+                <span class="title"><h3>Loan Management System</h3></span>
+            </li>
+            <li>
+                <a href="{% url 'home' %}">
+                    <span class="icon"><i class="fa fa-tachometer-alt"></i></span>
+                    <span class="title"><h3>Dashboard</h3></span>
+                </a>
+            </li>
+
+                {% if request.user.groups.first.name == "officer" %}
+            <li>
+                <a href="{% url 'application' %}">
+                    <span class="icon"><i class="fa fa-plus-circle"></i></span>
+                    <span class="title"><h3>New Application</h3></span>
+                </a>
+            </li>
+                {% endif %}
+
+            <li>
+                <a href="{% url 'all_customers' %}">
+                    <span class="icon"><i class="fa fa-users"></i></span>
+                    <span class="title"><h3>Customers</h3></span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'all_loans' %}">
+                    <span class="icon"><i class="fa fa-money-check"></i></span>
+                    <span class="title"><h3>Loans</h3></span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'all_payment' %}">
+                    <span class="icon"><i class="fa fa-dollar-sign"></i></span>
+                    <span class="title"><h3>Payments</h3></span>
+                </a>
+            </li>
+             <li>
+                <a href="{% url 'settings' %}">
+                    <span class="icon"><i class="fa fa-cogs"></i></span>
+                    <span class="title"><h3>Settings</h3></span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'logout' %}">
+                    <span class="icon"><i class="fa fa-sign-out-alt"></i></span>
+                    <span class="title"><h3>Log Out</h3></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+{% endblock %}

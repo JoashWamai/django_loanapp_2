@@ -1,0 +1,87 @@
+{% extends 'loanapp/base.html' %}
+
+{% load static %}
+
+{% block styles %}
+
+    <link rel="stylesheet" href="{% static 'loanapp/styles/loans.css' %}">
+
+{% endblock %}
+
+{% block title %} All Customers {% endblock %}
+
+{% block content %}
+    <div class="customer-container">
+        <h3>Customers</h3>
+        <table id="customertable">
+           <thead>
+               <th>Customer Name</th>
+               <th>Id/Passport</th>
+               <th>Email</th>
+               <th>Telephone</th>
+               <th>Gender</th>
+               <th>Residence</th>
+                <th>Age</th>
+                <th></th>
+           </thead>
+            <tbody>
+
+            {% for customer in customers %}
+
+                <tr>
+                    <td>
+                        <img src="{{customer.Picture.url}}">
+                        <a href="{% url 'cust_info' customer.id %}" style="text-decoration:none;">{{customer.fullname}}</a>
+                    </td>
+                <td>{{customer.Id_Passport}}</td>
+                <td>{{customer.Email}}</td>
+                <td>{{customer.Phone}}</td>
+                <td>{{customer.Gender}}</td>
+                    <td>{{customer.Location}}</td>
+                    <td>{{customer.age}}</td>
+                    <td style="display:flex;">
+                        <a href="{% url 'update_customer' customer.id %}"><i class="fa fa-edit"></i></a>
+                       <!-- <a href="{% url 'cust_report' customer.id %}"><i class="fa fa-download"></i></a>-->
+                        <a href="#"><i class="fa fa-bin"></i></a>
+                    </td>
+            </tr>
+
+            {% endfor %}
+
+            </tbody>
+        </table>
+        <div class="pagination">
+                <ul>
+
+                    {% if pages.has_previous %}
+
+                        <li>
+                            <a href="?page={{ pages.previous_page_number }}">
+                                <i class="fa fa-arrow-left"></i>
+                            </a>
+                        </li>
+
+                    {% endif %}
+
+                    {% for  pagenumber in pages.paginator.page_range %}
+
+                    <li><a href="?page={{pagenumber}}">{{pagenumber}}</a></li>
+
+                    {% endfor %}
+
+
+                    {% if pages.has_next %}
+
+                        <li>
+                            <a href="?page={{ pages.next_page_number }}">
+                                <i class="fa fa-arrow-right"></i>
+                            </a>
+                        </li>
+
+                    {% endif %}
+
+                </ul>
+        </div>
+    </div>
+
+{% endblock %}

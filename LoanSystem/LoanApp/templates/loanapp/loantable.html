@@ -1,0 +1,76 @@
+{% extends 'loanapp/base.html' %}
+
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'loanapp/styles/loans.css' %}">
+{% endblock %}
+
+{% block title %} All Loans{% endblock %}
+
+{% block content %}
+    <div class="loan-container">
+        <h3>Loans</h3>
+        <table>
+           <thead>
+               <th>Loan No</th>
+               <th>Customer Name</th>
+               <th>Loan Amount</th>
+               <th>Field Officer</th>
+               <th>SuperVisor</th>
+               <th>Status</th>
+                <th>Remarks</th>
+           </thead>
+            <tbody>
+
+            {% for customer in customers %}
+
+                <tr>
+                <td>{{customer.loan_set.first.LoanNumber}}</td>
+                    <td><a href="{% url 'cust_info' customer.id %}">{{customer.fullname}}</a></td>
+                <td>{{customer.business_set.first.LoanAmount}}</td>
+                <td>{{customer.loan_set.first.officer}}</td>
+                <td>{{customer.loan_set.first.supervisor}}</td>
+                <td>{{customer.loan_set.first.status}}</td>
+                    <td>{{customer.loan_set.first.Remark}}</td>
+            </tr>
+
+            {% endfor %}
+
+            </tbody>
+        </table>
+        <div class="pagination">
+                <ul>
+
+                    {% if pages.has_previous %}
+
+                        <li>
+                            <a href="?page={{ pages.previous_page_number }}">
+                                <i class="fa fa-arrow-left"></i>
+                            </a>
+                        </li>
+
+                    {% endif %}
+
+                    {% for  pagenumber in pages.paginator.page_range %}
+
+                    <li><a href="?page={{pagenumber}}">{{pagenumber}}</a></li>
+
+                    {% endfor %}
+
+
+                    {% if pages.has_next %}
+
+                        <li>
+                            <a href="?page={{ pages.next_page_number }}">
+                                <i class="fa fa-arrow-right"></i>
+                            </a>
+                        </li>
+
+                    {% endif %}
+
+                </ul>
+        </div>
+    </div>
+
+{% endblock %}

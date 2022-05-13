@@ -1,0 +1,10 @@
+{% load static %}
+
+<div class="graphbox">
+    <div class="graph">
+         <canvas id="piechart_status" data-url="{% url 'statusgraph' %}"></canvas>
+    </div>
+    <div class="graph">
+        <canvas id="bargraph_type" data-url="{% url 'typegraph' %}"></canvas>
+    </div>
+</div>

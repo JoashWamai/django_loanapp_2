@@ -1,0 +1,90 @@
+.loan-container,
+.customer-container
+{
+    background:#fff;
+    width:80%;
+    margin: 10px auto;
+    padding:15px 10px;
+    height:100%;
+}
+.customer-container
+{
+    width:90% !important;
+}
+.loan-container h3,
+.customer-container h3
+{
+    text-align:center;
+    font-size:20px;
+    font-weight:700;
+    color:#ccc;
+    margin:10px 0;
+    text-transform:uppercase;
+}
+.loan-container table,
+.customer-container table
+{
+   width:100%;
+   border-collapse:collapse;
+}
+.loan-container table thead,
+.customer-container table thead
+{
+    background:var(--main-color);
+}
+.loan-container table thead th,
+.customer-container table thead th
+{
+    font-size:17px;
+    font-weight:600;
+    padding:15px;
+    color:#fff;
+    border-right:1px solid #fff;
+}
+.loan-container table tbody tr,
+.customer-container table tbody tr
+{
+    border-bottom:1px solid #000;
+}
+.loan-container table tbody tr:hover,
+.loan-container table tbody tr:nth-child(even):hover,
+.customer-container table tbody tr:hover,
+.customer-container table tbody tr:nth-child(even):hover
+{
+    background:lightblue;
+    color:#fff;
+}
+.loan-container table tbody tr:nth-child(even),
+.customer-container table tbody tr:nth-child(even)
+{
+    background:#f5f5f5;
+}
+.loan-container table tbody tr td,
+.customer-container table tbody tr td
+{
+    padding:10px;
+    font-size:15px;
+    font-weight:400;
+}
+.loan-container table tbody tr td a
+{
+    text-decoration:none;
+    color:#000;
+}
+.customer-container table tbody tr td a
+{
+    color:#000;
+    line-height:1;
+}
+.customer-container table tbody tr td img
+{
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    object-fit:cover;
+    margin-right:10px;
+}
+.customer-container table tbody tr td a i.fa
+{
+    color:var(--main-color);
+}

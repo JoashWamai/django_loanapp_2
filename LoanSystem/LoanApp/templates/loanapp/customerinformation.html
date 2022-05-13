@@ -1,0 +1,136 @@
+{% extends 'loanapp/base.html' %}
+
+{% load static %}
+
+{% block styles %}
+
+    <link rel="stylesheet" href="{% static 'loanapp/styles/customerform.css' %}">
+
+{% endblock %}
+
+{% block title %} {{customer.fullname}} {% endblock %}
+
+{% block content %}
+
+    <div class="action-form">
+        <div class="action-form-container">
+            <div class="modal">
+                 <div class="header">
+                <div class="header-info">
+                    <div class="header-info-image">
+                        <img src="{{ request.user.profile.Photo.url }}">
+                    </div>
+                    <div class="header-info-text">
+                        <p>{{ request.user.username }}</p>
+                        <p>{{ request.user.profile.Category }}</p>
+                    </div>
+                </div>
+                <div class="close-icon">
+                    <a href="#" id="closeBtn"><i class="fa fa-plus"></i></a>
+                </div>
+            </div>
+                <form action="#" method="post">
+                    {% csrf_token %}
+                    <textarea id="text"></textarea>
+                     <div class="action-btn-box">
+                         <a href="#" id="approve-btn" data-action="approve" data-customer="{{customer.id}}">Approve</a>
+                         <a href="#" id="reject-btn"  data-action="reject" data-customer="{{customer.id}}">Reject</a>
+                     </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="customer-form">
+        <div class="top-section">
+            <div class="profile-picture">
+                <img src="{{customer.Picture.url}}" alt="prof-pic">
+            </div>
+            <div class="information">
+                <p><i class="fa fa-user"></i> {{customer.fullname}}</p>
+                <p><i class="fa fa-envelope"></i> {{customer.Email}}</p>
+                <p><i class="fa fa-phone"></i> {{customer.Phone}}</p>
+            </div>
+        </div>
+        <div class="information-section">
+            <div class="personal-info">
+                <h3 class="title">Personal Information</h3>
+                    <p><b>ID/Passport No:</b>{{customer.Id_Passport}}</p>
+                 <p><b>Date of Birth:</b>{{customer.Dob}}</p>
+                 <p><b>Gender:</b> {{customer.Gender}}</p>
+                 <p><b>County:</b>{{customer.County}}</p>
+                 <p><b>SubCounty:</b>{{customer.SubCounty}}</p>
+                 <p><b>District:</b>{{customer.District}}</p>
+                 <p><b>Location:</b>{{customer.Location}}</p>
+            </div>
+            <div class="business-info">
+                 <h3 class="title">Business Information</h3>
+                 <p><b>Business Name:</b>{{customer.business_set.first.BusinessName}}</p>
+                 <p><b>Operation Period</b>{{customer.business_set.first.OperatingYears}}years</p>
+                 <p><b>Monthly Income:</b>{{customer.business_set.first.MonthlyIncome|floatformat:2}}</p>
+                 <p><b>Business Type:</b>{{customer.business_set.first.BusinessType}}</p>
+                 <p><b>Loan Amount Requested:</b>{{customer.loan_set.first.Amount|floatformat:2}}</p>
+                 <p><b>County:</b>{{customer.business_set.first.BusCounty}}</p>
+                 <p><b>SubCounty:</b>{{customer.business_set.first.BusSubCounty }}</p>
+                 <p><b>District:</b>{{customer.business_set.first.BusDistrict}}</p>
+                 <p><b>Location:</b>{{customer.business_set.first.BusLocation}}</p>
+            </div>
+            <div class="guarantor-info grid-span-2">
+                 <h3 class="title">Guarantor Information</h3>
+                 <p><b>Name:</b>{{customer.guarantor_set.first.fullname}}</p>
+                 <p><b>Telephone No:</b>{{customer.guarantor_set.first.GTelephone}}</p>
+                 <p><b>Residence:</b>{{customer.guarantor_set.first.GResidence}}</p>
+                 <p><b>Relationship:</b>{{customer.guarantor_set.first.Relationship}}</p>
+            </div>
+            <div class="loan-info grid-span-2">
+                <h3 class="title">Loan Information</h3>
+                <div class="loan-content">
+                    <div class="col-1">
+                        <p><b>Loan Number:</b>{{customer.loan_set.first.LoanNumber}}</p>
+                        <p><b>Loan Status:</b>{{customer.loan_set.first.status}}</p>
+                        <p><b>Field Officer:</b>{{customer.loan_set.first.officer}}</p>
+
+                        {% if customer.loan_set.first.supervisor %}
+
+                            <p><b>Supervisor:</b>{{customer.loan_set.first.supervisor}}</p>
+
+                        {% endif %}
+
+                        {% if customer.loan_set.first.status != "Denied" %}
+
+                        <p><b>First Instalment Due:</b>{{customer.loan_set.first.firstinstalmentdate}}</p>
+                        <p><b>Second Instalment Due:</b>{{customer.loan_set.first.secondinstalmentdate}}</p>
+
+                        {% endif %}
+
+                    </div>
+                    <div class="col-2">
+
+                        {% if customer.loan_set.first.status != "Denied" %}
+
+                            <p><b>Total Amount Payable:</b>{{customer.loan_set.all.0.totalPayeble}}</p>
+                            <p><b>Date Issued:</b>{{customer.loan_set.all.0.DateCreated}}</p>
+                            <p><b>First Installment:</b>{{customer.loan_set.all.0.instalment |floatformat:2}}</p>
+                            <p><b>Second Instalment:</b>{{customer.loan_set.all.0.instalment |floatformat:2}}</p>
+                            <p><b>Loan Paid:</b>{{customer.payment_set.first.Amount |floatformat:2}}</p>
+                            <p><b>Balance Left:</b>{{customer.payment_set.first.balance |floatformat:2}}</p>
+
+                        {% else %}
+
+                            <p><b>Remarks:</b>{{customer.loan_set.first.Remark}}</p>
+
+                        {% endif %}
+
+                    </div>
+                </div>
+
+                    {% if request.user.groups.first.name == "supervisor" and customer.loan_set.first.status == "Pending" %}
+
+                        <a href="#" class="action-btn">Take Action</a>
+
+                    {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,83 @@
+{% load static %}
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title> Login </title>
+	<link rel="stylesheet" href="{% static 'accounts/styles/style.css' %}">
+	<link rel="stylesheet" href="{% static 'accounts/styles/styleresponsive.css' %}">
+	<link rel="stylesheet" href="{% static 'loanapp/vendors/FontAwesome/css/all.css' %}">
+</head>
+<body>
+	<div class="container">
+		<div class="form-container">
+			<div class="signin-signup">
+				<form action="{% url 'login' %}" class="signin-form" method="post">
+					{% csrf_token %}
+					<h2  class="title signin">Sign In</h2>
+					<div class="inputfield">
+						<i class="fas fa-user"></i>
+						<input type="text" placeholder="UserName" name="username">
+					</div>
+					<div class="inputfield">
+						<i class="fas fa-lock"></i>
+						<input type="password" placeholder="Password" name="password">
+					</div>
+					<input type="submit" class="btn" value="Log In">
+				</form>
+				<form action="{% url 'register' %}" class="signup-form" method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+					<h2  class="title signup">Sign Up</h2>
+					<div class="inputfield">
+						<i class="fas fa-user"></i>
+						{{reg_form.username}}
+					</div>
+					<div class="inputfield">
+						<i class="fas fa-envelope"></i>
+						{{reg_form.email}}
+					</div>
+					<div class="inputfield">
+						<i class="fas fa-lock"></i>
+						{{reg_form.password1}}
+					</div>
+					<div class="inputfield">
+						<i class="fas fa-lock"></i>
+						{{reg_form.password2}}
+					</div>
+					<div class="inputfield">
+						<i class="fas fa-users"></i>
+						{{prof_form.Category}}
+					</div>
+					<div>
+						<span>Picture</span>
+						{{prof_form.Photo}}
+					</div>
+					<input type="submit" class="btn" value="Sign Up">
+				</form>
+			</div>
+		</div>
+		<div class="panels-container">
+			<div class="panel left-panel">
+				<div class="content">
+					<h3>New Here?</h3>
+					<p>Sign up with us</p>
+					<button class="btn transparent" id="signup-btn">Sign In</button>
+				</div>
+				<img src="{% static 'accounts/images/svg/login.svg' %}" class="image" alt="">
+			</div>
+			<div class="panel right-panel">
+				<div class="content">
+					<h3>One of Us?</h3>
+					<p>Sign in</p>
+					<button class="btn transparent" id="signin-btn">Sign In</button>
+				</div>
+				<img src="{% static 'accounts/images/svg/register.svg' %}" class="image" alt="">
+			</div>
+		</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<script src="{% static 'accounts/scripts/script.js' %}"></script>
+	{% load sweetify %}
+	{% sweetify %}
+</body>
+</html>

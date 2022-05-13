@@ -1,0 +1,86 @@
+*
+{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+body
+{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:100vh;
+}
+.phone-outer
+{
+    height:500px;
+    width:300px;
+    background:#010c14;
+    border-radius:50px;
+    overflow:hidden;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    box-shadow: 10px 10px 20px rgba(0 0 0/ 0.8),
+                inset 5px 5px 10px rgba(255,255,255,0.8);
+}
+.phone-inner
+{
+    height:400px;
+    width:280px;
+    background:#f5f5f5;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    margin-top:30px;
+}
+.payment-form form
+{
+    width:100%;
+    height:100%;
+    padding:10px 20px;
+}
+.payment-form form .input
+{
+    display:grid;
+    grid-template-columns:25% 75%;
+    margin:15px 0;
+}
+.payment-form form .input label
+{
+    font-size:18px;
+    font-weight:400;
+    text-transform:capitalize;
+}
+.payment-form form .input input,
+.payment-form form .input select
+{
+    border:none;
+    outline:none;
+    background:#f5f5f5;
+    padding:0 10px;
+    font-size:15px;
+    color:#808080;
+    border-bottom: 1px solid #ccc;
+}
+.submit
+{
+    padding:10px 15px;
+    background:linear-gradient(145deg,purple,blue);
+    box-shadow:10px 10px 15px rgba(0 0 0/ 0.4);
+    font-size:700;
+    font-size:14px;
+    border-radius:10px;
+    color:#fff;
+    text-decoration:none;
+    margin:20px 60px;
+    transition:0.5s;
+    transform: scale(1);
+}
+.submit:hover
+{
+    background:linear-gradient(145deg,blue,purple);
+    box-shadow:15px 15px 15px rgba(0 0 0/ 0.4);
+    transform:scale(0.7);
+}

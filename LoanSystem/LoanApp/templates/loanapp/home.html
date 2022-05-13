@@ -1,0 +1,127 @@
+{% extends 'loanapp/base.html' %}
+
+{% load static %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+
+{% include 'loanapp/card.html' %}
+
+{% include 'loanapp/graphbox.html' %}
+
+	<div class="details">
+
+			{% if request.user.groups.first.name == "administrator" %}
+
+		<div class="recentApplications">
+			<div class="cardHeader">
+				<h2>Loan Applications</h2>
+				<a href="{% url 'all_loans' %}" class="btn">View All</a>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<td>No</td>
+						<td>Customer</td>
+						<td>Supervisor</td>
+						<td>Amount</td>
+						<td>Status</td>
+					</tr>
+				</thead>
+				<tbody>
+
+					{% for loan in loans %}
+
+						{% if loan.status == "Approved" %}
+
+							<tr>
+								<td>{{loan.LoanNumber}}</td>
+								<td>{{loan.customer.fullname}}</td>
+								<td>{{loan.supervisor}}</td>
+								<td>{{loan.Amount}}</td>
+								<td><span class="status {{loan.status}}">{{loan.status}}</span></td>
+								<td><a href="{% url 'disburse' loan.customer.id %}" class="disburse">Disburse</a></td>
+
+							</tr>
+
+						{% endif %}
+
+					{% endfor %}
+
+				</tbody>
+			</table>
+			</div>
+
+			{% else %}
+
+		<div class="recentApplications">
+			<div class="cardHeader">
+				<h2>Loan Applications</h2>
+				<a href="{% url 'all_loans' %}" class="btn">View All</a>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<td>No</td>
+						<td>Customer</td>
+						<td>Amount</td>
+						<td>Status</td>
+					</tr>
+				</thead>
+				<tbody>
+
+				{% for loan in loans %}
+
+					<tr>
+						<td>{{loan.LoanNumber}}</td>
+						<td>{{loan.customer.fullname}}</td>
+						<td>{{loan.Amount}}</td>
+						<td><span class="status {{loan.status}}">{{loan.status}}</span></td>
+						<td><a href="{% url 'cust_info' loan.customer.id %}"><i class="fa fa-eye"></i></a></td>
+					</tr>
+
+					{% endfor %}
+
+				</tbody>
+			</table>
+			</div>
+
+			{% endif %}
+
+		<div class="recentApplications">
+			<div class="cardHeader">
+				<h2>Loan Payments</h2>
+				<a href="{% url 'all_payment' %}" class="btn">View All</a>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<td>Name</td>
+						<td>Amount</td>
+						<td>Balance</td>
+						<td>Date</td>
+						<td>Status</td>
+					</tr>
+				</thead>
+				<tbody>
+
+				{% for payment in payments %}
+
+				<tr>
+					<td>{{payment.customer.fullname}}</td>
+					<td>{{payment.Amount}}</td>
+					<td>{{payment.balance}}</td>
+					<td>{{payment.DatePaid|date:"d  M Y" }}</td>
+					<td>{{payment.Status}}</td>
+				</tr>
+
+				{% endfor %}
+
+				</tbody>
+			</table>
+			</div>
+
+	</div>
+
+{% endblock %}

@@ -1,0 +1,139 @@
+{% extends 'loanapp/base.html' %}
+
+{% load static %}
+
+{% block styles %}
+
+    <link rel="stylesheet" href="{% static 'loanapp/styles/appform.css' %}">
+
+{% endblock %}
+
+{% block title %} Loan Appplication Form {% endblock %}
+
+{% block content %}
+
+    <div class="form-container">
+        <h1>Loan Applicant Details</h1>
+
+            <form method="POST" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+<!--                {{custform}}-->
+                <div class="form-personal-info">
+                    <h2 class="form-title">Personal Information</h2>
+                        <div class="input">
+                            <label>First Name*</label>
+                            {{custform.FirstName}}
+                        </div>
+                        <div class="input">
+                            <label>Second Name*</label>
+                            {{custform.LastName}}
+                        </div>
+                        <div class="input">
+                            <label>Gender*</label>
+                            {{custform.Gender}}
+                        </div>
+                        <div class="input">
+                            <label>Id/Passport No*</label>
+                            {{custform.Id_Passport}}
+                        </div>
+                        <div class="input">
+                            <label>Telephone No*</label>
+                           {{custform.Phone}}
+                        </div>
+                        <div class="input">
+                            <label>Email</label>
+                            {{custform.Email}}
+                        </div>
+                        <div class="input">
+                            <label>Dob*</label>
+                            {{custform.Dob}}
+                        </div>
+                        <div class="input">
+                            <label>County*</label>
+                            {{custform.County}}
+                        </div>
+                        <div class="input">
+                            <label>SubCounty*</label>
+                            {{custform.SubCounty}}
+                        </div>
+                        <div class="input">
+                            <label>District*</label>
+                            {{custform.District}}
+                        </div>
+                        <div class="input">
+                            <label>Location*</label>
+                            {{custform.Location}}
+                        </div>
+                        <div class="input">
+                            <label>Picture</label>
+                            {{custform.Picture}}
+                        </div>
+                </div>
+                <div class="form-business-info">
+                    <h2 class="form-title">Business Information</h2>
+                        <div class="input">
+                            <label>Business Name*</label>
+                            {{busform.BusinessName}}
+                        </div>
+                        <div class="input">
+                            <label>Business Location (County)*</label>
+                           {{busform.BusCounty}}
+                        </div>
+                        <div class="input">
+                            <label>Business Location (SubCounty)*</label>
+                            {{busform.BusSubCounty}}
+                        </div>
+                        <div class="input">
+                            <label>Business Location (District)*</label>
+                            {{busform.BusDistrict}}
+                        </div>
+                        <div class="input">
+                            <label>Business Location (Location)*</label>
+                           {{busform.BusLocation}}
+                        </div>
+                         <div class="input">
+                            <label>Business Type*</label>
+                            {{busform.BusinessType}}
+                        </div>
+                         <div class="input">
+                            <label>Operating Period (Years)*</label>
+                           {{busform.OperatingYears}}
+                        </div>
+                         <div class="input">
+                            <label>Loan Amount*</label>
+                           {{busform.LoanAmount}}
+                        </div>
+                         <div class="input">
+                            <label>Average Monthly Income*</label>
+                           {{busform.MonthlyIncome}}
+                        </div>
+                </div>
+                <div class="form-guarantor-info">
+                    <h2 class="form-title">Guarantor Information</h2>
+                        <div class="input">
+                            <label>First Name*</label>
+                            {{gurform.GFirstName}}
+                        </div>
+                        <div class="input">
+                            <label>Second Name*</label>
+                            {{gurform.GLastName}}
+                        </div>
+                        <div class="input">
+                            <label>Telephone No*</label>
+                           {{gurform.GTelephone}}
+                        </div>
+                        <div class="input">
+                            <label>Relationship*</label>
+                            {{gurform.Relationship}}
+                        </div>
+                        <div class="input">
+                            <label>Residence*</label>
+                           {{gurform.GResidence}}
+                        </div>
+                </div>
+                <input type="submit" value="Submit" class="submit-btn">
+            </form>
+    </div>
+
+
+{% endblock %}
